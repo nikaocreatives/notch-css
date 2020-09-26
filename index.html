@@ -9,6 +9,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css">
     <style>
+        :root {
+            --header: 60px;
+            --footer: 60px;
+        }
+        
         body {
             background-color: red;
             padding: 
@@ -16,13 +21,14 @@
                 env(safe-area-inset-right)
                 env(safe-area-inset-bottom)
                 env(safe-area-inset-left);
+            padding-top: calc(env(safe-area-inset-top) + var(--footer));
         }
         
         .notch--header {
             position: fixed;
             top: 0px;
             width: 100%;
-            height: auto;
+            height: var(--header);
             padding-top: env(safe-area-inset-top);
             background: pink;
             opacity: .75;
@@ -33,7 +39,7 @@
             position: fixed;
             bottom: 0px;
             width: 100%;
-            height: auto;
+            height: var(--footer);
             padding-bottom: env(safe-area-inset-bottom);
             background: pink;
             opacity: .75;
