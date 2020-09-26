@@ -18,26 +18,37 @@
                 env(safe-area-inset-left);
         }
         
-        .notch-header {
-            position: absolute;
+        .notch--header {
+            position: fixed;
             top: 0px;
             width: 100%;
             height: 60px;
             padding-top: env(safe-area-inset-top);
-            background: purple;
+            background: black;
+            opacity: .5;
+        }
+        
+        .notch--footer {
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            height: 60px;
+            padding-bottom: env(safe-area-inset-bottom);
+            background: black;
             opacity: .5;
         }
 
         .container {
             display: flex;
             width: 100%;
-            height: 100vh;
+            height: 2000px;
             background-color: blue;
         }
     </style>
 </head>
 <body>
-    <header class="notch-header"></header>
+    <header class="notch-header">Header</header>
     <div class="container"></div>
+    <footer class="notch--footer">Footer</footer>
 </body>
 </html>
