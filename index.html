@@ -12,6 +12,8 @@
         :root {
             --header-height: 60px;
             --footer-height: 60px;
+            --header-background: #fff;
+            --footer-background: #fff;
         }
         
         body {
@@ -22,30 +24,37 @@
                 env(safe-area-inset-bottom)
                 env(safe-area-inset-left);
             padding-top: calc(env(safe-area-inset-top) + var(--header-height));
+            padding-bottom: calc(env(safe-area-inset-bottom) + var(--footer-height));
         }
         
         .notch--header {
             position: fixed;
             top: 0px;
             width: 100%;
-            height: var(--header-height);
+            height: auto;
             padding-top: env(safe-area-inset-top);
             background: pink;
-            opacity: .75;
             z-index: 100;
+        }
+        
+        .notch--header > header {
+            height: var(--header-height);
         }
         
         .notch--footer {
             position: fixed;
             bottom: 0px;
             width: 100%;
-            height: var(--footer-height);
+            height: auto;
             padding-bottom: env(safe-area-inset-bottom);
             background: pink;
-            opacity: .75;
             z-index: 100;
         }
-
+        
+        .notch--footer > footer {
+            height: var(--footer-height);
+        }
+        
         .container {
             display: flex;
             width: 100%;
@@ -55,8 +64,8 @@
     </style>
 </head>
 <body>
-    <header class="notch--header"><div style="background:white;">Header</div></header>
+    <div class="notch--header"><header style="background:white;">Header</header></div>
     <div class="container"></div>
-    <footer class="notch--footer"><div style="background:white;">Footer</div></footer>
+    <div class="notch--footer"><footer style="background:white;">Footer</footer></div>
 </body>
 </html>
