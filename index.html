@@ -28,8 +28,8 @@
             position: fixed;
             top: 0px;
             width: 100%;
-            height: var(--header);
-            margin-top: env(safe-area-inset-top);
+            height: auto;
+            padding-top: env(safe-area-inset-top);
             background: pink;
             opacity: .75;
             z-index: 100;
@@ -39,8 +39,8 @@
             position: fixed;
             bottom: 0px;
             width: 100%;
-            height: var(--footer);
-            margin-bottom: env(safe-area-inset-bottom);
+            height: auto;
+            padding-bottom: env(safe-area-inset-bottom);
             background: pink;
             opacity: .75;
             z-index: 100;
@@ -55,8 +55,8 @@
     </style>
 </head>
 <body>
-    <header class="notch--header">Header</header>
+    <header class="notch--header"><div style="height:var(--height);">Header</div></header>
     <div class="container"></div>
-    <footer class="notch--footer">Footer</footer>
+    <footer class="notch--footer"><div style="height:var(--footer);">Footer</div></footer>
 </body>
 </html>
