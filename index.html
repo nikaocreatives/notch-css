@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, user-scalable=no">
@@ -7,67 +8,141 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Document</title>
+    <!-- Minireset -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <style>
+        /* Required for Notch CSS */
+
         :root {
-            --header-height: 60px;
-            --footer-height: 60px;
-            --header-background: #fff;
-            --footer-background: #fff;
+            --sat: env(safe-area-inset-top);
+            --sar: env(safe-area-inset-right);
+            --sab: env(safe-area-inset-bottom);
+            --sal: env(safe-area-inset-left);
         }
-        
+
         body {
-            background-color: red;
-            padding: 
-                env(safe-area-inset-top)
-                env(safe-area-inset-right)
-                env(safe-area-inset-bottom)
-                env(safe-area-inset-left);
-            padding-top: calc(env(safe-area-inset-top) + var(--header-height));
-            padding-bottom: calc(env(safe-area-inset-bottom) + var(--footer-height));
+            padding:
+                var(--sat) var(--sar) var(--sab) var(--sal);
+            padding-top: var(--sat);
+            padding-bottom: var(--sab);
         }
-        
+
         .notch--header {
             position: fixed;
             top: 0px;
             width: 100%;
             height: auto;
-            padding-top: env(safe-area-inset-top);
-            background: pink;
+            padding-top: var(--sat);
             z-index: 100;
-            opacity: .75;
         }
-        
-        .notch--header > header {
-            height: var(--header-height);
-        }
-        
+
         .notch--footer {
             position: fixed;
             bottom: 0px;
             width: 100%;
             height: auto;
-            padding-bottom: env(safe-area-inset-bottom);
-            background: pink;
+            padding-bottom: var(--sab);
             z-index: 100;
-            opacity: .75;
         }
-        
-        .notch--footer > footer {
-            height: var(--footer-height);
-        }
-        
+
+        /* Code for scroll and key - You do not need to include this. */
+
         .container {
-            display: flex;
             width: 100%;
             height: 2000px;
-            background-color: blue;
+            background-color: #FFF5D1;
+        }
+
+        .key {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 10px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 10px;
+        }
+
+        .swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        .item--safeTop>.swatch {
+            background: #001524;
+        }
+
+        .item--header>.swatch {
+            background: #15616D;
+        }
+
+        .item--footer>.swatch {
+            background: #FF7D00;
+        }
+
+        .item--safeBottom>.swatch {
+            background: #78290F;
+        }
+
+        .item--safeBottom>.text::after {
+            content: var(--sab);
         }
     </style>
 </head>
+
 <body>
-    <div class="notch--header"><header style="background:white;">Header</header></div>
+    <div class="notch--header" style="background:#001524;">
+        <header style="background:#15616D; height: 60px;"></header>
+    </div>
     <div class="container"></div>
-    <div class="notch--footer"><footer style="background:white;">Footer</footer></div>
+    <div class="key">
+        <div class="item item--safeTop">
+            <div class="swatch"></div>
+            <div class="text" id="swatchTopText">Safe top: --</div>
+        </div>
+        <div class="item item--header">
+            <div class="swatch"></div>
+            <div class="text">Header: 60px</div>
+        </div>
+        <div class="item item--footer">
+            <div class="swatch"></div>
+            <div class="text">Footer: 50px</div>
+        </div>
+        <div class="item item--safeBottom">
+            <div class="swatch"></div>
+            <div class="text" id="swatchBottomText">Safe bottom: --</div>
+        </div>
+    </div>
+    <div class="notch--footer" style="background:#78290F;">
+        <footer style="background:#FF7D00; height: 50px;"></footer>
+    </div>
+
+    <script>
+        var sat = getComputedStyle(document.documentElement).getPropertyValue("--sat");
+        var sab = getComputedStyle(document.documentElement).getPropertyValue("--sab");
+        document.getElementById("swatchTopText").innerHTML = "Safe top:" + sat;
+        document.getElementById("swatchBottomText").innerHTML = "Safe bottom:" + sab;
+    </script>
 </body>
+
 </html>
